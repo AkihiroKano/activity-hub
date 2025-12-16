@@ -12,6 +12,7 @@ const PostsPage = React.lazy(() => import('@pages/posts').then(m => ({ default: 
 const CreatePostPage = React.lazy(() => import('@pages/posts/create').then(m => ({ default: m.CreatePostPage })))
 const ViewPostPage = React.lazy(() => import('@pages/posts/view').then(m => ({ default: m.ViewPostPage })))
 const SearchPage = React.lazy(() => import('@pages/search').then(m => ({ default: m.SearchPage })))
+const SettingsPage = React.lazy(() => import('@pages/profile/settings').then(m => ({ default: m.SettingsPage })))
 
 // Loading component
 function LoadingFallback() {
@@ -78,6 +79,11 @@ export function AppRouter() {
                 <Route path="/profile" element={
                     <ProtectedRoute>
                         <ProfilePage />
+                    </ProtectedRoute>
+                } />
+                <Route path="/settings" element={
+                    <ProtectedRoute>
+                        <SettingsPage />
                     </ProtectedRoute>
                 } />
                 <Route path="/posts" element={

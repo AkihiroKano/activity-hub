@@ -50,7 +50,7 @@ export function UserMenu() {
                     </div>
                 </DropdownItem>
 
-                <DropdownItem onClick={() => navigate('/profile/settings')}>
+                <DropdownItem onClick={() => navigate('/settings')}>
                     <div className="flex items-center space-x-3">
                         <FaCog className="w-4 h-4 text-stone-400" />
                         <span>Настройки</span>

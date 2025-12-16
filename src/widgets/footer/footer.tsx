@@ -1,4 +1,5 @@
 import { FaGithub, FaTelegram, FaVk, FaYoutube } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -9,12 +10,12 @@ export function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Logo and description */}
                     <div className="space-y-4">
-                        <div className="flex items-center space-x-2">
+                        <Link to="/" className="flex items-center space-x-2">
                             <div className="w-8 h-8 bg-gradient-to-br from-[#ffc09e] to-amber-300 rounded-lg" />
                             <span className="text-xl font-bold text-stone-900 dark:text-stone-100">
                                 ActivityHub
                             </span>
-                        </div>
+                        </Link>
                     </div>
 
                     {/* Links */}
@@ -25,12 +26,12 @@ export function Footer() {
                         <ul className="space-y-2">
                             {['Правила', 'Помощь', 'Контакты', 'Реклама'].map((item) => (
                                 <li key={item}>
-                                    <a
-                                        href="#"
+                                    <Link
+                                        to={`/${item.toLowerCase().replace(' ', '-')}`}
                                         className="text-sm text-stone-600 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
                                     >
                                         {item}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -43,20 +44,20 @@ export function Footer() {
                         </h3>
                         <ul className="space-y-2">
                             {[
-                                'Наземные поездки',
-                                'Водные активности',
-                                'Воздушные полеты',
-                                'Активный отдых',
-                                'Экстрим',
-                                'Музыка и творчество',
-                            ].map((item) => (
-                                <li key={item}>
-                                    <a
-                                        href="#"
+                                { name: 'Наземные поездки', tag: 'ground-travel' },
+                                { name: 'Водные активности', tag: 'water-activities' },
+                                { name: 'Воздушные полеты', tag: 'air-travel' },
+                                { name: 'Активный отдых', tag: 'active-leisure' },
+                                { name: 'Экстрим', tag: 'extreme' },
+                                { name: 'Музыка и творчество', tag: 'music-creative' },
+                            ].map((category) => (
+                                <li key={category.name}>
+                                    <Link
+                                        to={`/categories?tag=${category.tag}`}
                                         className="text-sm text-stone-600 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
                                     >
-                                        {item}
-                                    </a>
+                                        {category.name}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -69,14 +70,16 @@ export function Footer() {
                         </h3>
                         <div className="flex space-x-4">
                             {[
-                                { icon: FaGithub, label: 'GitHub' },
-                                { icon: FaTelegram, label: 'Telegram' },
-                                { icon: FaVk, label: 'VK' },
-                                { icon: FaYoutube, label: 'YouTube' },
-                            ].map(({ icon: Icon, label }) => (
+                                { icon: FaGithub, label: 'GitHub', url: 'https://github.com' },
+                                { icon: FaTelegram, label: 'Telegram', url: 'https://telegram.org' },
+                                { icon: FaVk, label: 'VK', url: 'https://vk.com' },
+                                { icon: FaYoutube, label: 'YouTube', url: 'https://youtube.com' },
+                            ].map(({ icon: Icon, label, url }) => (
                                 <a
                                     key={label}
-                                    href="#"
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="p-2 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors"
                                     aria-label={label}
                                 >

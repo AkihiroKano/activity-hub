@@ -1,6 +1,7 @@
 import { FaStar, FaEdit, FaTimes, FaPlus } from 'react-icons/fa'
 import { Button } from '@/shared/ui/button'
 import { useAuth } from '@/app/providers/auth-provider'
+import { Link } from 'react-router-dom'
 
 interface QuickAccessItem {
     id: number
@@ -88,7 +89,10 @@ export function QuickAccess({
                         key={item.id}
                         className="group flex items-center justify-between px-3 py-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
                     >
-                        <div className="flex items-center space-x-3 min-w-0 flex-1">
+                        <Link
+                            to={`/categories?tag=${item.name.toLowerCase().replace(' ', '-')}`}
+                            className="flex items-center space-x-3 min-w-0 flex-1"
+                        >
                             {item.icon && (
                                 <span className="text-lg flex-shrink-0">{item.icon}</span>
                             )}
@@ -102,7 +106,7 @@ export function QuickAccess({
                                     </p>
                                 )}
                             </div>
-                        </div>
+                        </Link>
 
                         {onRemove && (
                             <button

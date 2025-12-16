@@ -6,6 +6,7 @@ import { Navigation } from '@widgets/sidebar/navigation'
 import { QuickAccess } from '@widgets/sidebar/quick-access'
 import { useRef } from 'react'
 import { useClickOutside } from '@/shared/hooks/use-click-outside'
+import { Link } from 'react-router-dom'
 
 export function Sidebar() {
     const { sidebarOpen, toggleSidebar, mobileSidebarOpen, setMobileSidebarOpen } = useUIStore()
@@ -26,13 +27,13 @@ export function Sidebar() {
             ref={sidebarRef}
             className="h-full flex flex-col bg-white/80 dark:bg-stone-800/60 backdrop-blur-sm"
         >
-            {/* Logo - ТОЛЬКО ДЛЯ МОБИЛЬНОЙ ВЕРСИИ */}
+            {/* Logo */}
             <div className={cn(
-                'p-4 border-b border-stone-200 dark:border-stone-700 lg:hidden',
+                'p-4 border-b border-stone-200 dark:border-stone-700',
                 !sidebarOpen && 'flex justify-center'
             )}>
-                <a
-                    href="/"
+                <Link
+                    to="/"
                     className={cn(
                         'flex items-center space-x-3',
                         !sidebarOpen && 'justify-center'
@@ -45,7 +46,7 @@ export function Sidebar() {
                             ActivityHub
                         </span>
                     )}
-                </a>
+                </Link>
             </div>
 
             {/* Main Navigation */}

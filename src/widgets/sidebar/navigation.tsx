@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa'
 import { cn } from '@/shared/utils/helpers'
 import { useAuth } from '@/app/providers/auth-provider'
+import { Link, useLocation } from 'react-router-dom'
 
 interface NavigationItem {
     icon: React.ElementType
@@ -26,6 +27,7 @@ interface NavigationProps {
 
 export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
     const { user } = useAuth()
+    const location = useLocation()
 
     const mainNavigation: NavigationItem[] = [
         { icon: FaHome, label: 'Главная', path: '/' },
@@ -46,6 +48,13 @@ export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
         }
     }
 
+    const isActive = (path: string) => {
+        if (path === '/') {
+            return location.pathname === path
+        }
+        return location.pathname.startsWith(path)
+    }
+
     return (
         <div className="space-y-6">
             {/* Основная навигация */}
@@ -61,14 +70,15 @@ export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
                         if (item.requiresAuth && !user) return null
 
                         return (
-                            <a
+                            <Link
                                 key={item.label}
-                                href={item.path}
+                                to={item.path}
                                 onClick={handleClick}
                                 className={cn(
                                     'flex items-center px-3 py-2 rounded-lg transition-colors',
                                     'hover:bg-stone-100 dark:hover:bg-stone-800',
                                     'text-stone-700 dark:text-stone-300',
+                                    isActive(item.path) && 'bg-stone-100 dark:bg-stone-800',
                                     isCollapsed ? 'justify-center' : 'justify-start space-x-3'
                                 )}
                             >
@@ -76,7 +86,7 @@ export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
                                 {!isCollapsed && (
                                     <span className="font-medium truncate">{item.label}</span>
                                 )}
-                            </a>
+                            </Link>
                         )
                     })}
                 </nav>
@@ -93,9 +103,9 @@ export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
                     </h3>
                     <nav className="space-y-1">
                         {actionNavigation.map((item) => (
-                            <a
+                            <Link
                                 key={item.label}
-                                href={item.path}
+                                to={item.path}
                                 onClick={handleClick}
                                 className={cn(
                                     'flex items-center px-3 py-2 rounded-lg transition-colors',
@@ -109,7 +119,7 @@ export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
                                 {!isCollapsed && (
                                     <span className="font-medium truncate">{item.label}</span>
                                 )}
-                            </a>
+                            </Link>
                         ))}
                     </nav>
                 </div>
@@ -123,19 +133,19 @@ export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
                     </h3>
                     <nav className="space-y-1">
                         {[
-                            { name: 'Мототуры', count: '1.2K', color: 'bg-amber-100 text-amber-800' },
-                            { name: 'Дайвинг', count: '845', color: 'bg-blue-100 text-blue-800' },
-                            { name: 'Велоспорт', count: '723', color: 'bg-green-100 text-green-800' },
-                            { name: 'Альпинизм', count: '512', color: 'bg-red-100 text-red-800' },
+                            { name: 'Мототуры', count: '1.2K', tag: 'мото' },
+                            { name: 'Дайвинг', count: '845', tag: 'дайвинг' },
+                            { name: 'Велоспорт', count: '723', tag: 'вело' },
+                            { name: 'Альпинизм', count: '512', tag: 'альпинизм' },
                         ].map((category) => (
-                            <a
+                            <Link
                                 key={category.name}
-                                href={`/categories?tag=${category.name.toLowerCase()}`}
+                                to={`/categories?tag=${category.tag}`}
                                 onClick={handleClick}
                                 className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
                             >
                                 <div className="flex items-center space-x-3">
-                                    <div className={`w-2 h-2 rounded-full ${category.color.split(' ')[0]}`} />
+                                    <div className={`w-2 h-2 rounded-full bg-amber-500`} />
                                     <span className="text-sm text-stone-700 dark:text-stone-300">
                                         {category.name}
                                     </span>
@@ -143,7 +153,7 @@ export function Navigation({ isCollapsed, onItemClick }: NavigationProps) {
                                 <span className="text-xs text-stone-500 dark:text-stone-500">
                                     {category.count}
                                 </span>
-                            </a>
+                            </Link>
                         ))}
                     </nav>
                 </div>
