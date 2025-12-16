@@ -9,6 +9,7 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true,
+    host: true,
   },
   resolve: {
     alias: {
@@ -22,5 +23,15 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['@tanstack/react-query', 'react-hook-form', 'zod'],
+          icons: ['react-icons'],
+          utils: ['date-fns', 'lodash.debounce', 'clsx', 'tailwind-merge'],
+        }
+      }
+    }
   }
 })

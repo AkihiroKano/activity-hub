@@ -1,16 +1,22 @@
 import { useEffect, RefObject } from 'react'
 
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
-    ref: RefObject<T | null>,
+    refs: RefObject<T | null> | RefObject<T | null>[],
     handler: (event: MouseEvent | TouchEvent) => void
 ) {
     useEffect(() => {
         const listener = (event: MouseEvent | TouchEvent) => {
-            const el = ref?.current
-            if (!el || el.contains(event.target as Node)) {
-                return
+            const refsArray = Array.isArray(refs) ? refs : [refs]
+
+            // Проверяем, что клик был вне всех переданных элементов
+            const isClickOutside = refsArray.every(ref => {
+                const el = ref?.current
+                return !el || !el.contains(event.target as Node)
+            })
+
+            if (isClickOutside) {
+                handler(event)
             }
-            handler(event)
         }
 
         document.addEventListener('mousedown', listener)
@@ -20,5 +26,5 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
             document.removeEventListener('mousedown', listener)
             document.removeEventListener('touchstart', listener)
         }
-    }, [ref, handler])
+    }, [refs, handler])
 }

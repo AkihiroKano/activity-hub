@@ -11,6 +11,7 @@ export const mockData = {
             bio: 'Любитель мототуров и горных дорог. Проехал более 50,000 км по России и Европе.',
             createdAt: '2024-01-01T10:00:00Z',
             favoriteSubcategoryIds: [1, 3],
+            role: 'user' as const,
         },
         {
             id: 2,
@@ -21,16 +22,40 @@ export const mockData = {
             bio: 'Профессиональный дайвер с 10-летним опытом. Люблю исследовать коралловые рифы.',
             createdAt: '2024-01-02T14:30:00Z',
             favoriteSubcategoryIds: [2],
+            role: 'user' as const,
         },
         {
             id: 3,
-            email: 'cyclist@example.com',
+            email: 'moderator@example.com',
             password: 'password123',
-            username: 'Вело_Путешественник',
+            username: 'Модератор_Активностей',
             avatar: '',
-            bio: 'Велотуризм - моя страсть. Проехал Крым, Кавказ и Альпы.',
+            bio: 'Модератор платформы. Помогаю поддерживать порядок и одобряю новые подкатегории.',
             createdAt: '2024-01-03T09:15:00Z',
+            favoriteSubcategoryIds: [1, 2, 3],
+            role: 'moderator' as const,
+        },
+        {
+            id: 4,
+            email: 'biker@example.com',
+            password: 'password123',
+            username: 'Вело_Мастер',
+            avatar: '',
+            bio: 'Велосипедист с 5-летним стажем. Участвую в веломарафонах и организую групповые заезды.',
+            createdAt: '2024-01-04T11:20:00Z',
             favoriteSubcategoryIds: [1],
+            role: 'user' as const,
+        },
+        {
+            id: 5,
+            email: 'climber@example.com',
+            password: 'password123',
+            username: 'Альпинист_Про',
+            avatar: '',
+            bio: 'Альпинист, покорил 20 вершин выше 4000 метров. Инструктор по горному туризму.',
+            createdAt: '2024-01-05T16:45:00Z',
+            favoriteSubcategoryIds: [6],
+            role: 'user' as const,
         },
     ],
 
@@ -44,8 +69,8 @@ export const mockData = {
             mainCategoryId: 1,
             createdByUserId: 1,
             isApproved: true,
-            moderators: [1],
-            tags: ['мото', 'путешествия', 'горы', 'дороги'],
+            moderators: [3],
+            tags: ['мото', 'путешествия', 'горы', 'дороги', 'байк', 'адреналин'],
             createdAt: '2024-01-01T10:00:00Z',
         },
         {
@@ -55,8 +80,8 @@ export const mockData = {
             mainCategoryId: 2,
             createdByUserId: 2,
             isApproved: true,
-            moderators: [2],
-            tags: ['дайвинг', 'подводный мир', 'кораллы', 'акулы'],
+            moderators: [3],
+            tags: ['дайвинг', 'подводный мир', 'кораллы', 'акулы', 'океан', 'снорклинг'],
             createdAt: '2024-01-02T14:30:00Z',
         },
         {
@@ -66,8 +91,8 @@ export const mockData = {
             mainCategoryId: 1,
             createdByUserId: 1,
             isApproved: true,
-            moderators: [1],
-            tags: ['авто', 'путешествия', 'кемпинг'],
+            moderators: [3],
+            tags: ['авто', 'путешествия', 'кемпинг', 'дорога', 'внедорожник'],
             createdAt: '2024-01-03T09:15:00Z',
         },
         {
@@ -78,7 +103,7 @@ export const mockData = {
             createdByUserId: 2,
             isApproved: false,
             moderators: [],
-            tags: ['серфинг', 'океан', 'волны'],
+            tags: ['серфинг', 'океан', 'волны', 'доска', 'пляж'],
             createdAt: '2024-01-04T16:45:00Z',
         },
         {
@@ -88,8 +113,8 @@ export const mockData = {
             mainCategoryId: 3,
             createdByUserId: 1,
             isApproved: true,
-            moderators: [1],
-            tags: ['параплан', 'полеты', 'небо'],
+            moderators: [3],
+            tags: ['параплан', 'полеты', 'небо', 'восхождение', 'вершины'],
             createdAt: '2024-01-05T11:20:00Z',
         },
         {
@@ -97,10 +122,10 @@ export const mockData = {
             name: 'Альпинизм',
             description: 'Восхождения на горы',
             mainCategoryId: 4,
-            createdByUserId: 2,
+            createdByUserId: 5,
             isApproved: true,
-            moderators: [2],
-            tags: ['альпинизм', 'горы', 'восхождения'],
+            moderators: [3, 5],
+            tags: ['альпинизм', 'горы', 'восхождения', 'скалолазание', 'ледолазание'],
             createdAt: '2024-01-06T13:45:00Z',
         },
         {
@@ -108,11 +133,44 @@ export const mockData = {
             name: 'Музыкальные фестивали',
             description: 'Посещение музыкальных событий',
             mainCategoryId: 6,
-            createdByUserId: 3,
+            createdByUserId: 4,
             isApproved: true,
             moderators: [3],
-            tags: ['музыка', 'фестивали', 'концерты'],
+            tags: ['музыка', 'фестивали', 'концерты', 'live', 'артисты'],
             createdAt: '2024-01-07T15:30:00Z',
+        },
+        {
+            id: 8,
+            name: 'Велотуризм',
+            description: 'Дальние велопоходы',
+            mainCategoryId: 1,
+            createdByUserId: 4,
+            isApproved: true,
+            moderators: [3],
+            tags: ['вело', 'туризм', 'поход', 'палатка', 'горный велосипед'],
+            createdAt: '2024-01-08T10:15:00Z',
+        },
+        {
+            id: 9,
+            name: 'Скалолазание',
+            description: 'Спортивное скалолазание',
+            mainCategoryId: 4,
+            createdByUserId: 5,
+            isApproved: true,
+            moderators: [5],
+            tags: ['скалолазание', 'тренировки', 'скалодром', 'страховка'],
+            createdAt: '2024-01-09T14:30:00Z',
+        },
+        {
+            id: 10,
+            name: 'Кайтсерфинг',
+            description: 'Катание на кайте',
+            mainCategoryId: 2,
+            createdByUserId: 2,
+            isApproved: true,
+            moderators: [3],
+            tags: ['кайтсерфинг', 'ветер', 'пляж', 'доска', 'воздушный змей'],
+            createdAt: '2024-01-10T16:20:00Z',
         },
     ],
 
@@ -120,19 +178,22 @@ export const mockData = {
         {
             id: 1,
             title: 'Незабываемый мототур по Кавказским горам: 7 дней чистого адреналина',
-            content: 'Это было самое невероятное путешествие в моей жизни! Мы с друзьями организовали недельный тур по самым живописным местам Кавказа...',
+            content: 'Это было самое невероятное путешествие в моей жизни! Мы с друзьями организовали недельный тур по самым живописным местам Кавказа...\n\nМаршрут: Владикавказ - Кармадон - Казбек - Дарьял - Грузия. Дороги местами сложные, но виды того стоили! Особенно запомнился перевал на высоте 2500 метров с панорамным видом на горные вершины.\n\nСоветы для тех, кто планирует подобный тур:\n1. Обязательно проверьте технику перед поездкой\n2. Возьмите теплую одежду - в горах холодно даже летом\n3. Запаситесь наличными - не везде есть терминалы\n4. Не забудьте фотоаппарат!',
             authorId: 1,
             subcategoryId: 1,
-            tags: ['мото', 'горы', 'кавказ', 'путешествие', 'адреналин'],
+            tags: ['мото', 'горы', 'кавказ', 'путешествие', 'адреналин', 'тур'],
             media: {
                 photos: [
                     'https://images.unsplash.com/photo-1558980664-1db506751c6c?w=800&auto=format&fit=crop',
                     'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w-800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop',
                 ],
                 route: {
                     points: [
                         { lat: 43.0406, lng: 44.6778 },
                         { lat: 42.661, lng: 44.642 },
+                        { lat: 42.735, lng: 44.615 },
                     ],
                     distance: 350,
                     duration: 420,
@@ -151,13 +212,15 @@ export const mockData = {
         {
             id: 2,
             title: 'Первый опыт дайвинга на Мальдивах',
-            content: 'Невероятные впечатления от первого погружения! Кристально чистая вода, разноцветные кораллы и тысячи рыб...',
+            content: 'Невероятные впечатления от первого погружения! Кристально чистая вода, разноцветные кораллы и тысячи рыб...\n\nНаш инструктор Ахмед показал нам лучшие места для дайвинга. Мы увидели:\n- Коралловые сады\n- Стаи разноцветных рыб\n- Морских черепах\n- Даже небольшую акулу-няньку!\n\nДля новичков важно:\n1. Пройти обучение у сертифицированного инструктора\n2. Не трогать кораллы и морских обитателей\n3. Следить за временем и давлением\n4. Расслабиться и получать удовольствие!',
             authorId: 2,
             subcategoryId: 2,
-            tags: ['дайвинг', 'мальдивы', 'первый опыт', 'кораллы'],
+            tags: ['дайвинг', 'мальдивы', 'первый опыт', 'кораллы', 'океан'],
             media: {
                 photos: [
                     'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&auto=format&fit=crop',
                 ],
             },
             location: {
@@ -173,14 +236,25 @@ export const mockData = {
         {
             id: 3,
             title: 'Велопоход по Крыму: 300 км за 5 дней',
-            content: 'Проехали от Севастополя до Керчи вдоль побережья. Сложный маршрут с подъемами и спусками, но невероятные виды на море и горы. Ночуяли в палатках на берегу. Незабываемый опыт!',
-            authorId: 3,
-            subcategoryId: 1,
-            tags: ['вело', 'крым', 'поход', 'палатка'],
+            content: 'Проехали от Севастополя до Керчи вдоль побережья. Сложный маршрут с подъемами и спусками, но невероятные виды на море и горы. Ночуяли в палатках на берегу. Незабываемый опыт!\n\nЕжедневные этапы:\nДень 1: Севастополь - Балаклава (45 км)\nДень 2: Балаклава - Форос (50 км)\nДень 3: Форос - Алупка (55 км)\nДень 4: Алупка - Судак (70 км)\nДень 5: Судак - Керчь (80 км)\n\nСнаряжение, которое спасло нас:\n- Качественные палатки\n- Спальники для +5°C\n- Портативная газовая горелка\n- Ремкомплект для велосипедов',
+            authorId: 4,
+            subcategoryId: 8,
+            tags: ['вело', 'крым', 'поход', 'палатка', 'туризм', 'велотуризм'],
             media: {
                 photos: [
                     'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=800&auto=format&fit=crop',
                 ],
+                route: {
+                    points: [
+                        { lat: 44.6167, lng: 33.5254 },
+                        { lat: 44.4956, lng: 34.1640 },
+                        { lat: 44.6760, lng: 34.4100 },
+                    ],
+                    distance: 300,
+                    duration: 720,
+                },
             },
             location: {
                 lat: 44.9521,
@@ -194,25 +268,51 @@ export const mockData = {
         },
         {
             id: 4,
-            title: 'Мототур по Кавказу: незабываемые впечатления',
-            content: 'Провели неделю в горах Кавказа на мотоциклах. Маршрут включал самые живописные дороги с панорамными видами. Погода была идеальной, дороги - сложными, но проходимыми. Рекомендую всем любителям адреналина и красивых пейзажей!',
-            authorId: 1,
-            subcategoryId: 1,
-            tags: ['мото', 'горы', 'кавказ', 'путешествие', 'адреналин'],
+            title: 'Восхождение на Эльбрус: мечта сбылась!',
+            content: 'Наконец-то покорил высочайшую вершину Европы! Подготовка заняла 6 месяцев, но это того стоило.\n\nЛагеря по маршруту:\n1. Приют Бочки (3800 м)\n2. Приют 11 (4100 м)\n3. Седловина (5300 м)\n4. Вершина (5642 м)\n\nСложности:\n- Акклиматизация\n- Холод (-25°C ночью)\n- Сильный ветер\n- Нехватка кислорода\n\nНо когда ты на вершине и видишь восход солнца над облаками - все трудности забываются! Рекомендую всем, кто ищет настоящий вызов.',
+            authorId: 5,
+            subcategoryId: 6,
+            tags: ['альпинизм', 'эльбрус', 'горы', 'восхождение', 'экстрим'],
             media: {
                 photos: [
-                    'https://images.unsplash.com/photo-1558980664-1db506751c6c?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=800&auto=format&fit=crop',
                 ],
             },
             location: {
-                lat: 43.0406,
-                lng: 44.6778,
-                name: 'Кавказские горы',
+                lat: 43.3550,
+                lng: 42.4392,
+                name: 'Эльбрус, Кабардино-Балкария',
+            },
+            likesCount: 312,
+            commentsCount: 48,
+            createdAt: '2024-01-10T08:15:00Z',
+            updatedAt: '2024-01-10T08:15:00Z',
+        },
+        {
+            id: 5,
+            title: 'Кайтсерфинг в Египте: ветер и волны',
+            content: 'Отличный сезон для кайтсерфинга в Дахабе! Стабильный ветер, теплая вода и отличная инфраструктура.\n\nЛучшие споты:\n- Laguna Beach - для новичков\n- Blue Lagoon - для прогрессирующих\n- Ikea - для профессионалов\n\nШколы, которые рекомендую:\n1. Kite School Dahab\n2. Dahab Kiteboarding\n3. Red Sea Kite\n\nСоветы начинающим:\n1. Берите уроки у сертифицированных инструкторов\n2. Начинайте с большого кайта\n3. Не бойтесь падать - это часть обучения\n4. Наслаждайтесь процессом!',
+            authorId: 2,
+            subcategoryId: 10,
+            tags: ['кайтсерфинг', 'египет', 'ветер', 'доска', 'спорт'],
+            media: {
+                photos: [
+                    'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&auto=format&fit=crop',
+                ],
+            },
+            location: {
+                lat: 28.5333,
+                lng: 34.4333,
+                name: 'Дахаб, Египет',
             },
             likesCount: 156,
             commentsCount: 24,
-            createdAt: '2024-01-10T08:15:00Z',
-            updatedAt: '2024-01-10T08:15:00Z',
+            createdAt: '2024-01-12T16:30:00Z',
+            updatedAt: '2024-01-12T16:30:00Z',
         },
     ],
 
@@ -238,11 +338,29 @@ export const mockData = {
         {
             id: 3,
             content: 'Красивые фото! Особенно понравился вид с перевала. Какая была погода?',
-            authorId: 2,
+            authorId: 4,
             postId: 1,
             parentId: null,
             likesCount: 8,
             createdAt: '2024-01-15T13:20:00Z',
+        },
+        {
+            id: 4,
+            content: 'Погода была идеальной! +25 днем, ночью опускалось до +10. Без дождей.',
+            authorId: 1,
+            postId: 1,
+            parentId: 3,
+            likesCount: 3,
+            createdAt: '2024-01-15T14:15:00Z',
+        },
+        {
+            id: 5,
+            content: 'Какой кайт вы использовали? Я только начинаю, посоветуйте оборудование.',
+            authorId: 4,
+            postId: 5,
+            parentId: null,
+            likesCount: 2,
+            createdAt: '2024-01-12T17:45:00Z',
         },
     ],
 
@@ -283,6 +401,31 @@ export const mockData = {
             isRead: false,
             createdAt: '2024-01-14T09:30:00Z',
         },
+        {
+            id: 4,
+            type: 'moderation' as const,
+            userId: 3,
+            sourceUserId: 3,
+            sourceUserName: 'Система',
+            sourceUserAvatar: '',
+            subcategoryId: 4,
+            message: 'Новая подкатегория "Серфинг" ожидает одобрения',
+            isRead: false,
+            createdAt: '2024-01-10T14:20:00Z',
+        },
+        {
+            id: 5,
+            type: 'mention' as const,
+            userId: 2,
+            sourceUserId: 1,
+            sourceUserName: 'Мото_Путешественник',
+            sourceUserAvatar: '',
+            postId: 1,
+            commentId: 2,
+            message: 'упомянул вас в комментарии',
+            isRead: false,
+            createdAt: '2024-01-15T12:35:00Z',
+        },
     ],
 
     searchHistory: [
@@ -290,6 +433,8 @@ export const mockData = {
         'дайвинг красное море',
         'велопоход крым',
         'альпинизм кавказ',
+        'кайтсерфинг египет',
+        'параплан полеты',
     ],
 
     popularTags: [
@@ -299,12 +444,56 @@ export const mockData = {
         { tag: 'горы', count: 987 },
         { tag: 'пляж', count: 654 },
         { tag: 'экстрим', count: 432 },
+        { tag: 'вело', count: 567 },
+        { tag: 'альпинизм', count: 345 },
+        { tag: 'кайтсерфинг', count: 234 },
+        { tag: 'тур', count: 789 },
     ],
 
     userStats: [
-        { id: 1, username: 'Мото_Эксперт', posts: 42 },
-        { id: 2, username: 'Дайвер_Про', posts: 28 },
-        { id: 3, username: 'Вело_Путешественник', posts: 35 },
+        { userId: 1, username: 'Мото_Путешественник', posts: 2, followers: 156, following: 89, likes: 420 },
+        { userId: 2, username: 'Дайвер_Про', posts: 2, followers: 234, following: 123, likes: 567 },
+        { userId: 4, username: 'Вело_Мастер', posts: 1, followers: 89, following: 45, likes: 203 },
+        { userId: 5, username: 'Альпинист_Про', posts: 1, followers: 312, following: 67, likes: 489 },
+    ],
+
+    postLikes: [
+        { postId: 1, userId: 2 },
+        { postId: 1, userId: 3 },
+        { postId: 1, userId: 4 },
+        { postId: 2, userId: 1 },
+        { postId: 2, userId: 3 },
+        { postId: 3, userId: 1 },
+        { postId: 3, userId: 2 },
+        { postId: 4, userId: 1 },
+        { postId: 4, userId: 2 },
+        { postId: 4, userId: 3 },
+        { postId: 4, userId: 4 },
+        { postId: 5, userId: 1 },
+        { postId: 5, userId: 4 },
+    ],
+
+    bookmarks: [
+        { userId: 1, postId: 2 },
+        { userId: 1, postId: 4 },
+        { userId: 2, postId: 1 },
+        { userId: 2, postId: 3 },
+        { userId: 3, postId: 1 },
+        { userId: 3, postId: 4 },
+        { userId: 4, postId: 1 },
+        { userId: 4, postId: 2 },
+    ],
+
+    subscriptions: [
+        { followerId: 2, followingId: 1 },
+        { followerId: 3, followingId: 1 },
+        { followerId: 4, followingId: 1 },
+        { followerId: 1, followingId: 2 },
+        { followerId: 3, followingId: 2 },
+        { followerId: 1, followingId: 5 },
+        { followerId: 2, followingId: 5 },
+        { followerId: 3, followingId: 5 },
+        { followerId: 4, followingId: 5 },
     ],
 }
 
@@ -313,22 +502,14 @@ if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('activityhub-mocks')
     if (saved) {
         try {
-            Object.assign(mockData, JSON.parse(saved))
+            const parsed = JSON.parse(saved)
+            // Обновляем только если структура совместима
+            if (parsed.users && parsed.posts) {
+                Object.assign(mockData, parsed)
+            }
         } catch (e) {
             console.error('Failed to load saved mocks:', e)
         }
-    }
-
-    // Auto-save on changes
-    const originalPush = Array.prototype.push
-    Array.prototype.push = function (...items) {
-        const result = originalPush.apply(this, items)
-        try {
-            localStorage.setItem('activityhub-mocks', JSON.stringify(mockData))
-        } catch (e) {
-            console.error('Failed to save mocks:', e)
-        }
-        return result
     }
 }
 

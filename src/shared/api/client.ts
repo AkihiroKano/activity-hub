@@ -1,8 +1,11 @@
 const API_BASE = '/api'
 
 async function fetchAPI(endpoint: string, options: RequestInit = {}) {
+    const token = localStorage.getItem('token')
+
     const headers = {
         'Content-Type': 'application/json',
+        ...(token && { 'Authorization': `Bearer ${token}` }),
         ...options.headers,
     }
 

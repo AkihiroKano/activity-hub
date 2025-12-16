@@ -40,6 +40,20 @@ export default {
                 'gradient-light': 'linear-gradient(135deg, #fffbeb 0%, #fafaf9 100%)',
                 'gradient-dark': 'linear-gradient(135deg, #1c1917 0%, #292524 100%)',
             },
+            animation: {
+                'fade-in': 'fadeIn 0.2s ease-in-out',
+                'zoom-in': 'zoomIn 0.2s ease-in-out',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                zoomIn: {
+                    '0%': { transform: 'scale(0.95)' },
+                    '100%': { transform: 'scale(1)' },
+                },
+            },
         },
     },
     plugins: [],

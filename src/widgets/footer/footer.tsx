@@ -15,10 +15,6 @@ export function Footer() {
                                 ActivityHub
                             </span>
                         </div>
-                        <p className="text-sm text-stone-600 dark:text-stone-400">
-                            Социальная платформа для обмена активностями, увлечениями и хобби.
-                            Присоединяйтесь к сообществу единомышленников!
-                        </p>
                     </div>
 
                     {/* Links */}
@@ -94,10 +90,7 @@ export function Footer() {
                 {/* Copyright */}
                 <div className="mt-8 pt-8 border-t border-stone-200 dark:border-stone-700 text-center">
                     <p className="text-sm text-stone-600 dark:text-stone-400">
-                        © {currentYear} ActivityHub. Все права защищены.
-                    </p>
-                    <p className="text-xs text-stone-500 dark:text-stone-500 mt-2">
-                        Это демо-версия проекта. Все данные сгенерированы автоматически.
+                        © {currentYear} ActivityHub
                     </p>
                 </div>
             </div>

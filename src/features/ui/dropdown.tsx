@@ -9,67 +9,91 @@ interface DropdownProps {
     align?: 'left' | 'right'
     className?: string
     onClose?: () => void
+    isOpen?: boolean
+    onToggle?: (open: boolean) => void
 }
 
-export function Dropdown({ trigger, children, align = 'left', className, onClose }: DropdownProps) {
-    const [isOpen, setIsOpen] = useState(false)
-    const [position, setPosition] = useState({ top: 0, left: 0 })
+export function Dropdown({
+    trigger,
+    children,
+    align = 'left',
+    className,
+    onClose,
+    isOpen: controlledIsOpen,
+    onToggle
+}: DropdownProps) {
+    const [internalIsOpen, setInternalIsOpen] = useState(false)
+    const [position, setPosition] = useState({ top: 0, left: 0, width: 0 })
     const triggerRef = useRef<HTMLDivElement>(null)
     const dropdownRef = useRef<HTMLDivElement>(null)
 
+    const isControlled = controlledIsOpen !== undefined
+    const isOpen = isControlled ? controlledIsOpen : internalIsOpen
+
+    const setIsOpen = (value: boolean) => {
+        if (!isControlled) {
+            setInternalIsOpen(value)
+        }
+        onToggle?.(value)
+        if (!value) {
+            onClose?.()
+        }
+    }
+
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
+            if (e.key === 'Escape' && isOpen) {
                 setIsOpen(false)
                 onClose?.()
             }
         }
 
-        if (isOpen) {
-            document.addEventListener('keydown', handleEscape)
-
-            if (triggerRef.current) {
-                const rect = triggerRef.current.getBoundingClientRect()
-                setPosition({
-                    top: rect.bottom + window.scrollY,
-                    left: align === 'left' ? rect.left + window.scrollX : rect.right + window.scrollX,
-                })
-            }
-        }
+        document.addEventListener('keydown', handleEscape)
 
         return () => {
             document.removeEventListener('keydown', handleEscape)
         }
-    }, [isOpen, align, onClose])
+    }, [isOpen, onClose])
 
-    useClickOutside(dropdownRef, () => {
-        setIsOpen(false)
-        onClose?.()
+    useClickOutside([triggerRef, dropdownRef], () => {
+        if (isOpen) {
+            setIsOpen(false)
+            onClose?.()
+        }
     })
 
     const handleTriggerClick = () => {
+        if (triggerRef.current) {
+            const rect = triggerRef.current.getBoundingClientRect()
+            setPosition({
+                top: rect.bottom + window.scrollY + 4,
+                left: rect.left + window.scrollX,
+                width: rect.width
+            })
+        }
         setIsOpen(!isOpen)
     }
 
-    const dropdownContent = (
+    const dropdownContent = isOpen ? (
         <div
             ref={dropdownRef}
             className={cn(
-                'fixed z-50 mt-1 min-w-[200px] rounded-lg border shadow-lg',
+                'fixed z-50 mt-1 rounded-lg border shadow-lg',
                 'bg-white dark:bg-stone-800',
                 'border-stone-200 dark:border-stone-700',
-                'animate-in',
+                'animate-in fade-in-0 zoom-in-95',
+                'min-w-[200px]',
                 className
             )}
             style={{
                 top: position.top,
                 left: align === 'left' ? position.left : 'auto',
-                right: align === 'right' ? window.innerWidth - position.left : 'auto',
+                right: align === 'right' ? window.innerWidth - position.left - position.width : 'auto',
             }}
         >
             {children}
         </div>
-    )
+    ) : null
 
     return (
         <>
