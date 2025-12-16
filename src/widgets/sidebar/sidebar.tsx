@@ -29,7 +29,7 @@ export function Sidebar() {
         >
             {/* Logo */}
             <div className={cn(
-                'p-4 border-b border-stone-200 dark:border-stone-700',
+                'p-4 border-b border-stone-200 dark:border-stone-700 lg:hidden',
                 !sidebarOpen && 'flex justify-center'
             )}>
                 <Link
@@ -41,11 +41,9 @@ export function Sidebar() {
                     onClick={handleNavClick}
                 >
                     <div className="w-8 h-8 bg-gradient-to-br from-[#ffc09e] to-amber-300 rounded-lg" />
-                    {sidebarOpen && (
-                        <span className="text-xl font-bold text-stone-900 dark:text-stone-100">
-                            ActivityHub
-                        </span>
-                    )}
+                    <span className="text-xl font-bold text-stone-900 dark:text-stone-100">
+                        ActivityHub
+                    </span>
                 </Link>
             </div>
 
