@@ -1,1 +1,1 @@
-# activity-hub
+# ActivityHub
